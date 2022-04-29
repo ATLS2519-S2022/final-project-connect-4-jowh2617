@@ -14,12 +14,15 @@ public class GreedyPlayer implements Player
     }
     
     int ID;
+    int opp_ID;
     @Override
     public void init(int id, int msecPerMove, int rows, int cols) {
     	ID = id;
+    	opp_ID = 3 - ID;
     }
 
     @Override
+    //determines this player's moves by evaluating all possible options only for the current turn using calcScore
     public void calcMove(
         Connect4Board board, int oppMoveCol, Arbitrator arb) 
         throws TimeUpException {
@@ -41,10 +44,10 @@ public class GreedyPlayer implements Player
         		}
         		board.unmove(i, ID);
         	}
-        	
         }
     }
     
+    //simple heuristic to determine score of the game
     public int calcScore(Connect4Board board, int id)
 	{
 		final int rows = board.numRows();
@@ -91,5 +94,6 @@ public class GreedyPlayer implements Player
 		}
 		return score;
 	}
+    
 
 }
